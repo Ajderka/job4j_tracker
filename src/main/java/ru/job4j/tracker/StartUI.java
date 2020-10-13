@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import ru.job4j.tracker.input.*;
+import ru.job4j.tracker.userAction.*;
+
 import java.util.Arrays;
 
 public class StartUI {
@@ -46,44 +49,28 @@ public class StartUI {
         System.out.println(Arrays.toString(tracker.findByName(name)));
     }
 
-    public void init(Input input, Tracker tracker) {
+    public void init(Input input, Tracker tracker, UserAction[] actions) {
         boolean run = true;
         while (run) {
-            this.showMenu();
-            int select = Integer.parseInt(input.askStr("Select: "));
-            if (select == 0) {
-                StartUI.createItem(input, tracker);
-            } else if (select == 1) {
-                StartUI.showAll(tracker);
-            } else if (select == 2) {
-                StartUI.replaceItem(input, tracker);
-            } else if (select == 3) {
-                StartUI.deleteItem(input, tracker);
-            } else if (select == 4) {
-                StartUI.findItemById(input, tracker);
-            } else if (select == 5) {
-                StartUI.findItemByName(input, tracker);
-            }
-            if (select == 6) {
-                run = false;
-            }
+            this.showMenu(actions); //Просто выводит на экран меню, методом перебора массива action (массив действий)
+            int select = input.askInt("Select: "); //вводим интовую переменную с выбором дейсвия пользователя
+            UserAction action = actions[select]; //создаем новое действие уже не ввиде массива, а как отдельное. И вытаскиваем с массива выбранное пользователем дейсвие
+            run = action.execute(input, tracker); //передаем в само дейсвие которое выбрал пользователь - параметры
         }
     }
 
-    private void showMenu() {
+
+    private void showMenu(UserAction[] actions) {
         System.out.println("Menu.");
-        System.out.println("0. Add new Item.");
-        System.out.println("1. Show all items.");
-        System.out.println("2. Edit item.");
-        System.out.println("3. Delete item.");
-        System.out.println("4. Find item by Id.");
-        System.out.println("5. Find items by name.");
-        System.out.println("6. Exit Program.");
+        for (int index = 0; index < actions.length; index++) {
+            System.out.println(index + ". " + actions[index].name());
+        }
     }
 
     public static void main(String[] args) {
         Input input = new ConsoleInput();
         Tracker tracker = new Tracker();
-        new StartUI().init(input, tracker);
+        UserAction[] userActions = {new CreateAction(), new ShowAll(), new ReplaceItem(), new DeleteItem(), new FindItemById(), new FindItemByName(), new Exit()};
+        new StartUI().init(input, tracker, userActions);
     }
 }
