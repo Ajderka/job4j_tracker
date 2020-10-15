@@ -20,7 +20,7 @@ public class FindItemById implements UserAction {
     public boolean execute(Input input, Tracker tracker) {
         out.println("=== Find item by id ====");
         int id = Integer.parseInt(input.askStr("Enter id: "));
-        System.out.println(tracker.findById(id));
+        out.println(tracker.findById(id));
         return true;
     }
 }

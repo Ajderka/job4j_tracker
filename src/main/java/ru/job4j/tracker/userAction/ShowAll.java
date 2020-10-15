@@ -22,7 +22,7 @@ public class ShowAll implements UserAction {
         out.println("=== Show all items ====");
         Item[] items = tracker.findAll();
         for (Item item : items) {
-            System.out.println(item);
+            out.println(item);
         }
         return true;
     }
