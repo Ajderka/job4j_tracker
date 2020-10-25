@@ -14,6 +14,30 @@ import static org.junit.Assert.*;
 public class StartUITest {
 
     @Test
+    public void whenInvalidExit() {
+        Output out = new StubOutput();
+        Input in = new StubInput(
+                new String[] { "10", "0"}
+        );
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {
+                new Exit(out)
+        };
+        new StartUI(out).init(in, tracker, actions);
+        assertThat(out.toString(), is(
+                String.format(
+                        "Menu.%n"
+                                + "0. === Exit ====%n"
+                                + "Wrong input, you can select: 0 .. 0%n"
+                                + "Menu.%n"
+                                + "0. === Exit ====%n"
+                                + "=== Exit ===="
+                                + System.lineSeparator()
+                )
+        ));
+    }
+
+    @Test
     public void whenFindByIdAction() {
         Output output = new StubOutput();
         Input input = new StubInput(
