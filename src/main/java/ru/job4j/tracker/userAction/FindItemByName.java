@@ -22,7 +22,7 @@ public class FindItemByName implements UserAction {
     public boolean execute(Input input, Tracker tracker) {
         out.println("=== Find items by name ====");
         String name = input.askStr("Enter name: ");
-        out.println(Arrays.toString(tracker.findByName(name)));
+        out.println(Arrays.toString(tracker.findByName(name).toArray()));
         return true;
     }
 }
