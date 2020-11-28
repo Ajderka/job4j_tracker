@@ -5,14 +5,7 @@ import ru.job4j.tracker.input.Input;
 import ru.job4j.tracker.input.StubInput;
 import ru.job4j.tracker.output.Output;
 import ru.job4j.tracker.output.StubOutput;
-import ru.job4j.tracker.useraction.CreateAction;
-import ru.job4j.tracker.useraction.DeleteAction;
-import ru.job4j.tracker.useraction.Exit;
-import ru.job4j.tracker.useraction.FindItemById;
-import ru.job4j.tracker.useraction.FindItemByName;
-import ru.job4j.tracker.useraction.ReplaceAction;
-import ru.job4j.tracker.useraction.ShowAll;
-import ru.job4j.tracker.useraction.UserAction;
+import ru.job4j.tracker.useraction.*;
 
 import java.util.ArrayList;
 import java.util.List;
