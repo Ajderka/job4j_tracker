@@ -7,11 +7,11 @@ public class TrackerPrivateStaticFinalClass {
     }
 
     public static Tracker getInstance() {
-        return Holder.instance;
+        return Holder.INSTANCE;
     }
 
     private static final class Holder {
-        private static final Tracker instance = new Tracker();
+        private static final Tracker INSTANCE = new Tracker();
     }
 
     public static void main(String[] args) {

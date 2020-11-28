@@ -1,4 +1,4 @@
-package ru.job4j.tracker.userAction;
+package ru.job4j.tracker.useraction;
 
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;

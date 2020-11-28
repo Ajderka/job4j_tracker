@@ -3,7 +3,7 @@ package ru.job4j.tracker;
 import ru.job4j.tracker.input.*;
 import ru.job4j.tracker.output.ConsoleOutput;
 import ru.job4j.tracker.output.Output;
-import ru.job4j.tracker.userAction.*;
+import ru.job4j.tracker.useraction.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,6 @@ public class StartUI {
             run = action.execute(input, tracker);
         }
     }
-
 
     private void showMenu(List<UserAction> actions) {
         out.println("Menu.");

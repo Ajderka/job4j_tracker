@@ -1,29 +1,27 @@
-package ru.job4j.tracker.userAction;
+package ru.job4j.tracker.useraction;
 
-import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 import ru.job4j.tracker.input.Input;
 import ru.job4j.tracker.output.Output;
 
-public class ReplaceAction implements UserAction {
+public class DeleteAction implements UserAction {
     private final Output out;
 
-    public ReplaceAction(Output out) {
+    public DeleteAction(Output out) {
         this.out = out;
     }
 
     @Override
     public String name() {
-        return "=== Replace item ====";
+        return "=== Delete item ====";
     }
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
-        out.println("=== Replace item ====");
+        out.println("=== Delete item ====");
         int id = Integer.parseInt(input.askStr("Enter id: "));
-        String name = input.askStr("Enter name: ");
-        Item item = new Item(name);
-        tracker.replace(id, item);
+        tracker.delete(id);
+        System.out.println("Delete complete");
         return true;
     }
 }

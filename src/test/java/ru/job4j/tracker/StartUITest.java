@@ -5,7 +5,7 @@ import ru.job4j.tracker.input.Input;
 import ru.job4j.tracker.input.StubInput;
 import ru.job4j.tracker.output.Output;
 import ru.job4j.tracker.output.StubOutput;
-import ru.job4j.tracker.userAction.*;
+import ru.job4j.tracker.useraction.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class StartUITest {
     public void whenInvalidExit() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] { "10", "0"}
+                new String[]{"10", "0"}
         );
         Tracker tracker = new Tracker();
         ArrayList<UserAction> actions = new ArrayList<>();
