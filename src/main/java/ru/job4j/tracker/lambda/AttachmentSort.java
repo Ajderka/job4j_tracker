@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.function.Function;
 
 public class AttachmentSort {
     public static void main(String[] args) {
@@ -28,5 +29,12 @@ public class AttachmentSort {
         };
         attachmentList.sort(attachmentComparator);
         System.out.println(attachmentList);
+        Comparator<Student> comp = new Comparator<Student>() {
+            @Override
+            public int compare(Student o1, Student o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        };
+        Function<Student, String> func = Student::getName;
     }
 }
