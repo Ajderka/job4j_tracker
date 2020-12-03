@@ -2,56 +2,38 @@ package ru.job4j.tracker.lambda;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SearchAtt {
-    public static List<Attachment> filterSize(List<Attachment> list) {
-        List<Attachment> rsl = new ArrayList<>();
-        for (Attachment att : list) {
-            if (att.getSize() > 100) {
-                rsl.add(att);
-            }
-        }
-        return rsl;
-    }
-
-    public static List<Attachment> filterName(List<Attachment> list) {
-        List<Attachment> rsl = new ArrayList<>();
-        for (Attachment att : list) {
-            if (att.getName().contains("bug")) {
-                rsl.add(att);
-            }
-        }
-        return rsl;
-    }
-
     private static List<Attachment> filter(List<Attachment> list, Predicate<Attachment> predicate) {
-        List<Attachment> resultList = new ArrayList<>();
-        for (Attachment attachment : list) {
-            if (predicate.test(attachment)) {
-                resultList.add(attachment);
-            }
-        }
-        return resultList;
-    }
+        return list.stream()
+                .filter(predicate)
+                .collect(Collectors.toList());
+}
 
     public static List<Attachment> filterSizePredicate(List<Attachment> list) {
-        Predicate<Attachment> predicate = new Predicate<Attachment>() {
-            @Override
-            public boolean test(Attachment attachment) {
-                return attachment.getSize() > 100;
-            }
-        };
-        return filter(list, predicate);
+        return filter(list, x -> x.getSize() > 100);
     }
 
     public static List<Attachment> filterNamePredicate(List<Attachment> list) {
-        Predicate<Attachment> predicate = new Predicate<Attachment>() {
-            @Override
-            public boolean test(Attachment attachment) {
-                return attachment.getName().equals("bug");
-            }
-        };
-        return filter(list, predicate);
+        return filter(list, x -> x.getName().equals("bug"));
+    }
+
+    public static void main(String[] args) {
+        List<Attachment> list = Stream.of(
+                new Attachment("Cinema", 45),
+                new Attachment("Auto", 450),
+                new Attachment("Home", 101),
+                new Attachment("bug", 10))
+                .collect(Collectors.toList());
+        for (Attachment a: filterSizePredicate(list)) {
+            System.out.println(a);
+        }
+        for (Attachment a: filterNamePredicate(list)) {
+            System.out.println(a);
+        }
     }
 }
